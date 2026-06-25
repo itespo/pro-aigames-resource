@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏体育 · 识别与初探</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+            background: #f4f7fa;
+            line-height: 1.7;
+            color: #1e293b;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(160deg, #0b1c2f 0%, #162b41 100%);
+            color: #eaf0f6;
+            padding: 4.5rem 1.5rem 5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 210, 110, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            color: #f5f9ff;
+        }
+
+        .hero .accent-word {
+            color: #fbc96b;
+            font-weight: 500;
+        }
+
+        .hero .short-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.2rem;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 浅色正文区 */
+        .content {
+            max-width: 960px;
+            margin: -2rem auto 0 auto;
+            padding: 2.5rem 2rem 3.5rem 2rem;
+            background: #ffffff;
+            border-radius: 28px 28px 0 0;
+            box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.02);
+            position: relative;
+            z-index: 3;
+        }
+
+        .intro-block {
+            margin-bottom: 2.2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9edf2;
+        }
+
+        .intro-block p {
+            margin-bottom: 1.1rem;
+            font-size: 1.05rem;
+        }
+
+        .intro-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-block a {
+            color: #1b5e9e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.15s;
+        }
+
+        .intro-block a:hover {
+            color: #134078;
+            border-bottom-color: #8bb6d9;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem 2.5rem;
+            margin: 2rem 0 2.2rem 0;
+            list-style: none;
+        }
+
+        .feature-item {
+            background: #f9fbfd;
+            padding: 1.2rem 1.4rem;
+            border-radius: 20px;
+            border-left: 4px solid #b6cde0;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .feature-item:hover {
+            background: #f1f5f9;
+            border-left-color: #8bb6d9;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: #1e3a5f;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        .scene-note {
+            background: #f2f6fc;
+            padding: 1.6rem 2rem;
+            border-radius: 24px;
+            margin: 2.2rem 0 1.8rem 0;
+        }
+
+        .scene-note p {
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .scene-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin-top: 1.8rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-preview summary {
+            cursor: default;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.2rem 0;
+            color: #1e3a5f;
+        }
+
+        .faq-preview details {
+            flex: 1 1 200px;
+            background: #fafcff;
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #dce3ec;
+        }
+
+        .faq-preview details p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #2c3e5a;
+        }
+
+        .closing-note {
+            margin-top: 2.5rem;
+            padding-top: 1.2rem;
+            font-size: 0.98rem;
+            color: #2c3e50;
+            border-top: 1px dashed #d0d9e3;
+            line-height: 1.8;
+        }
+
+        .closing-note a {
+            color: #1b5e9e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #9bb6d1;
+            transition: border-bottom 0.2s;
+        }
+
+        .closing-note a:hover {
+            border-bottom: 1px solid #1b5e9e;
+        }
+
+        @media (max-width: 680px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .hero {
+                padding: 3rem 1.2rem 4rem;
+            }
+
+            .content {
+                padding: 1.8rem 1.2rem 2.8rem;
+                margin-top: -1.5rem;
+                border-radius: 20px 20px 0 0;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .feature-item {
+                padding: 1rem 1.2rem;
+            }
+
+            .faq-preview details {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .content {
+                padding: 3rem 3rem 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>你想快速识别 <span class="accent-word">爱游戏体育</span> 是什么。</h1>
+            <div class="short-sub">一个面向体育爱好者与服务提供方的信息聚合入口</div>
+        </div>
+    </section>
+
+    <main class="content">
+
+        <div class="intro-block">
+            <p>无论你是因为赛事资讯、活动通知，还是想了解某个体育社区的服务，来到这个页面时，第一眼往往决定接下来是否留得下来。作为入口，<a href="https://panel-aiyouxitiyu.com">爱游戏体育</a> 的设计初衷是：把分散在各类公告、群组、平台里的实用线索，整理成相对清晰的指引。</p>
+            <p>你不需要立刻记住所有功能——只需要知道这里能做什么、对谁有用，就够了。下面列出几个侧面，帮你快速判断它是否与你的需求重合。</p>
+        </div>
+
+        <ul class="feature-list">
+            <li class="feature-item">
+                <h3>信息整合</h3>
+                <p>集中展示近期赛事安排、规则变动、报名窗口等，减少在多个页面之间反复跳转的麻烦。</p>
+            </li>
+            <li class="feature-item">
+                <h3>社区公告</h3>
+                <p>来自不同兴趣小组或运动团体的通知与更新，经过筛选后以统一格式呈现，避免遗漏关键日期。</p>
+            </li>
+            <li class="feature-item">
+                <h3>服务引导</h3>
+                <p>如果你在找场地、教练或活动支持，这里提供了常见的对接路径与联系方式索引。</p>
+            </li>
+            <li class="feature-item">
+                <h3>反馈入口</h3>
+                <p>页面底部或侧边通常会保留意见收集通道，方便你指出信息偏差或建议补充的内容。</p>
+            </li>
+        </ul>
+
+        <div class="scene-note">
+            <p><strong>一个典型场景：</strong> 你刚加入某个运动社群，想知道接下来的友谊赛时间和报名方式。以往需要在群聊天记录里翻找，或者分别问几个管理员。而在 <a href="https://panel-aiyouxitiyu.com">爱游戏体育</a> 的聚合页面上，同一时间段内的活动会以列表形式出现，附带简单的说明与联系人标记。省去了一些重复询问的环节。</p>
+            <p>当然，它并非万能的信息库——准确度依然依赖各来源方的主动更新。但至少，你可以把它当做一个相对固定的参考坐标。</p>
+        </div>
+
+        <div class="faq-preview">
+            <details>
+                <summary>页面信息多久刷新？</summary>
+                <p>没有固定时间表，通常随各合作方通知同步。如果发现明显过期内容，可以通过页面预留的渠道提醒维护者。</p>
+            </details>
+            <details>
+                <summary>所有内容都有用吗？</summary>
+                <p>因人而异。有人关注赛事，有人找搭子，有人只查场地。建议根据你的兴趣标签筛选浏览，不必逐条阅读。</p>
+            </details>
+        </div>
+
+        <div class="closing-note">
+            <p>说到底，一个入口页的价值在于：让你花最少的时间，判断它是否值得继续深入。如果你发现 <a href="https://panel-aiyouxitiyu.com">爱游戏体育</a> 恰好对上了你当前的某条线索，不妨把它放在浏览器的书签角落里，需要时回来扫一眼。如果没有你正在找的内容，它也只是一个安静的索引——不打扰，不夸饰，只陈述它覆盖的范围。</p>
+            <p style="margin-top:1rem; font-style: italic; color: #4a5b72;">—— 一点说明，供你参考。</p>
+        </div>
+
+    </main>
+
+</body>
+</html>
