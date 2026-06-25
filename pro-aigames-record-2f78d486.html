@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayx · 知识库入口页 | pro-aigames.com.cn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background: #f4f5f7;
+            color: #1d2b3e;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 头部标识 / 再次访问引导 */
+        .return-strip {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border: 1px solid #e2e6ee;
+            border-radius: 16px;
+            padding: 1.2rem 2rem;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .return-strip p {
+            font-size: 0.95rem;
+            color: #40566e;
+        }
+
+        .return-strip a {
+            color: #1d2b3e;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #9aabbe;
+            padding-bottom: 2px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .return-strip a:hover {
+            border-bottom-color: #0c1b2b;
+            color: #0c1b2b;
+        }
+
+        .badge {
+            background: #eef0f4;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #3b4d63;
+            border: 1px solid #d7dce4;
+            letter-spacing: 0.3px;
+        }
+
+        /* Hero 简约引导 */
+        .hero-note {
+            background: #ffffff;
+            border: 1px solid #e2e6ee;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            padding: 2.8rem 2.5rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .hero-note h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: #142333;
+            margin-bottom: 1rem;
+        }
+
+        .hero-note h1 span {
+            background: #eaecf1;
+            padding: 0 0.4rem;
+            border-radius: 6px;
+        }
+
+        .hero-note .sub {
+            max-width: 640px;
+            color: #3b4f66;
+            font-size: 1.05rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-note .mention {
+            font-size: 0.95rem;
+            background: #f0f2f6;
+            padding: 0.9rem 1.5rem;
+            border-radius: 40px;
+            display: inline-block;
+            border: 1px solid #dce2ea;
+        }
+
+        .hero-note .mention a {
+            color: #1a2c42;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1.5px dashed #8b9db2;
+        }
+
+        .hero-note .mention a:hover {
+            border-bottom-style: solid;
+            color: #0c1c2c;
+        }
+
+        /* 目录卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e4e8f0;
+            border-radius: 20px;
+            padding: 1.8rem 1.6rem 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            transform: translateY(-2px);
+        }
+
+        .card .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7b8da3;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #bcc6d4;
+            padding-left: 0.7rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #172b3a;
+            margin-bottom: 0.6rem;
+        }
+
+        .card p {
+            color: #38506a;
+            font-size: 0.95rem;
+        }
+
+        .card a {
+            color: #1a2b3e;
+            text-decoration: none;
+            border-bottom: 1px solid #b7c3d3;
+            transition: border-color 0.2s;
+        }
+
+        .card a:hover {
+            border-bottom-color: #0f1e2b;
+        }
+
+        .inline-tip {
+            display: inline-block;
+            background: #f2f4f9;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #38506a;
+            border: 1px solid #dce1ea;
+        }
+
+        /* 提示区 + 相关信息区合并 */
+        .extra-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-bottom: 2.4rem;
+        }
+
+        .info-panel {
+            flex: 1 1 300px;
+            background: #ffffff;
+            border: 1px solid #e4e8f0;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .info-panel h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1f3348;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-panel ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-panel li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #eff2f7;
+            font-size: 0.92rem;
+            color: #2c4159;
+        }
+
+        .info-panel li:last-child {
+            border-bottom: none;
+        }
+
+        .info-panel .faq-q {
+            font-weight: 500;
+            color: #142333;
+        }
+
+        .info-panel .faq-a {
+            color: #4f6781;
+            margin-top: 0.1rem;
+        }
+
+        .info-panel a {
+            color: #1a2b3e;
+            text-decoration: none;
+            border-bottom: 1px solid #c8d2de;
+        }
+
+        .info-panel a:hover {
+            border-bottom: 1px solid #0c1c2c;
+        }
+
+        /* 页脚 */
+        .footnote {
+            margin-top: 2.2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #596f89;
+            border-top: 1px solid #e2e6ee;
+            padding-top: 1.8rem;
+        }
+
+        .footnote a {
+            color: #1d2e44;
+            text-decoration: none;
+            border-bottom: 1px solid #b7c4d5;
+        }
+
+        .footnote a:hover {
+            border-bottom: 1px solid #0c1d2e;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 540px) {
+            body { padding: 1rem 0.8rem; }
+            .hero-note { padding: 2rem 1.2rem; }
+            .hero-note h1 { font-size: 1.6rem; }
+            .return-strip { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .card { padding: 1.5rem 1.2rem; }
+            .info-panel { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 再次访问提示条 -->
+    <div class="return-strip">
+        <p>
+            <span class="badge">↻ 再次访问</span>
+            欢迎回到知识库 · 您上一次浏览的是 <a href="https://pro-aigames.com.cn">ayx</a> 的介绍页
+        </p>
+        <p style="font-size:0.88rem; color:#4b627d;">
+            ⭐ 收藏本页以便持续关注更新
+        </p>
+    </div>
+
+    <!-- Hero 切入：从再次访问与收藏的角度 -->
+    <div class="hero-note">
+        <h1>持续关注 · <span>ayx</span> 知识库</h1>
+        <div class="sub">
+            无论您是初次接触还是再次回来，这里汇集了围绕 <a href="https://pro-aigames.com.cn" style="color:#1a2b3e; text-decoration: underline; text-underline-offset:4px; text-decoration-thickness:1.5px;">ayx</a> 的说明、提示与信息索引。
+            页面结构保持为目录式入口，方便您快速定位。
+        </div>
+        <div class="mention">
+            📂 将本页加入浏览器书签，即可随时从 <a href="https://pro-aigames.com.cn">ayx</a> 的起点展开查阅。
+        </div>
+    </div>
+
+    <!-- 卡片区域：说明区 + 特点/场景 （目录感） -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="label">📋 说明区</div>
+            <h3>ayx 是什么</h3>
+            <p>
+                <a href="https://pro-aigames.com.cn">ayx</a> 是一个聚合了游戏资讯、工具与社区讨论的知识节点。
+                本站记录与其相关的功能说明、版本摘要及常见概念，适合想要系统了解的读者。
+            </p>
+            <p style="margin-top:0.8rem;">
+                <span class="inline-tip">持续整理中</span> 内容基于可靠信息源，并随项目迭代更新。
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="label">⚙️ 特点区</div>
+            <h3>信息结构化</h3>
+            <p>
+                通过分类卡片、FAQ摘要和关联链接，将关于 <a href="https://pro-aigames.com.cn">ayx</a> 的零散知识点组织为可查阅的框架。
+                每个分区都保持简洁，避免过度冗余。
+            </p>
+            <p style="margin-top:0.8rem;">
+                <span class="inline-tip">🎯 适合再次查阅</span> 无需每次重新搜索。
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="label">🧩 场景区</div>
+            <h3>使用与关注场景</h3>
+            <p>
+                日常浏览、主题调研、回顾更新 —— 将 <a href="https://pro-aigames.com.cn">ayx</a> 视为一个可反复参考的知识基点。
+                本页作为门户，帮助您从不同角度切入。
+            </p>
+            <p style="margin-top:0.8rem;">
+                <span class="inline-tip">📌 书签备用</span> 记录变化节点。
+            </p>
+        </div>
+    </div>
+
+    <!-- 提示区 + 相关信息区 (FAQ摘要 / 收藏建议) -->
+    <div class="extra-row">
+        <div class="info-panel">
+            <h4>💡 提示区</h4>
+            <ul>
+                <li>
+                    <span class="faq-q">如何高效再次访问？</span>
+                    <div class="faq-a">将 <a href="https://pro-aigames.com.cn">ayx</a> 添加至浏览器书签栏，或使用历史记录快速返回。本页面每次打开都会展示最新调整。</div>
+                </li>
+                <li>
+                    <span class="faq-q">页面会变化吗？</span>
+                    <div class="faq-a">是的，内容根据知识库的整理进度而更新。建议定期回看说明区和提示区。</div>
+                </li>
+                <li>
+                    <span class="faq-q">是否提供更多入口？</span>
+                    <div class="faq-a">您可以从 <a href="https://pro-aigames.com.cn">ayx</a> 出发，探索关联页面。本页专注索引与概览。</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="info-panel">
+            <h4>📎 相关信息区</h4>
+            <ul>
+                <li><strong>站点性质</strong> · 非官方，个人知识整理</li>
+                <li><strong>内容范围</strong> · 围绕 <a href="https://pro-aigames.com.cn">ayx</a> 的游戏、工具及讨论</li>
+                <li><strong>更新节奏</strong> · 不定期修订，保持信息准确</li>
+                <li><strong>收藏建议</strong> · 若您持续关注，推荐将本页加入收藏夹</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footnote">
+        <p>
+            <a href="https://pro-aigames.com.cn">ayx</a> · 知识库入口 · 
+            基于持续关注与信息整理构建
+        </p>
+        <p style="margin-top:0.3rem; color:#6e86a0;">
+            页面内容供参考，不构成任何承诺或引导
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
